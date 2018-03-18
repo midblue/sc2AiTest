@@ -24,6 +24,12 @@ flags.DEFINE_integer("screen_resolution", 84,
 flags.DEFINE_integer("minimap_resolution", 64,
                      "Resolution for minimap feature layers.")
 
+flags.DEFINE_integer("displayMode", 0, "")
+flags.DEFINE_integer("windowwidth", 1920, "")
+flags.DEFINE_integer("windowheight", 1080, "")
+flags.DEFINE_integer("windowx", 0, "")
+flags.DEFINE_integer("windowy", 0, "")
+
 flags.DEFINE_integer("max_agent_steps", 0, "Total agent steps.")
 flags.DEFINE_integer("game_steps_per_episode", 0, "Game steps per episode.")
 flags.DEFINE_integer("step_mul", 8, "Game steps per agent step.")
@@ -37,7 +43,7 @@ flags.DEFINE_enum("difficulty", None, sc2_env.difficulties.keys(),
 
 flags.DEFINE_bool("profile", False, "Whether to turn on code profiling.")
 flags.DEFINE_bool("trace", False, "Whether to trace the code execution.")
-flags.DEFINE_integer("parallel", 10, "How many instances to run in parallel.")
+flags.DEFINE_integer("parallel", 4, "How many instances to run in parallel.")
 
 flags.DEFINE_bool("save_replay", False, "Whether to save a replay at the end.")
 
@@ -55,6 +61,8 @@ def run_thread(agent_cls, map_name, visualize):
       game_steps_per_episode=FLAGS.game_steps_per_episode,
       screen_size_px=(FLAGS.screen_resolution, FLAGS.screen_resolution),
       minimap_size_px=(FLAGS.minimap_resolution, FLAGS.minimap_resolution),
+      #display_mode=FLAGS.displayMode,
+
       visualize=visualize) as env:
     env = available_actions_printer.AvailableActionsPrinter(env)
     agent = agent_cls()
