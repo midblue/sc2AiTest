@@ -1,13 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from threading import Timer
+from time import sleep
 
-calculation_unit = 10
+calculation_unit = 20
 WIN = "1"
 LOSE = "-1"
 TIE = "0"
 
 def printGraph():
+    print('drawing')
     results = []
     win_dicts = {}
     lose_dicts = {}
@@ -35,14 +37,16 @@ def printGraph():
             tie_count = 0
             win_count = 0
             lose_count = 0
-
-    plt.xlabel("number of trials")
-    plt.ylabel("percentage of victories(%)")
-    plt.plot(np.array(list(win_dicts.keys())), np.array(list(win_dicts.values())), color="red")
-    plt.plot(np.array(list(tie_dicts.keys())), np.array(list(tie_dicts.values())), color="gray")
-    plt.plot(np.array(list(lose_dicts.keys())), np.array(list(lose_dicts.values())), color="blue")
-    plt.show()
+   
+    plt.plot(np.array(list(win_dicts.keys())), np.array(list(win_dicts.values())), color="#00bb00")
+    plt.plot(np.array(list(tie_dicts.keys())), np.array(list(tie_dicts.values())), color="#bbbbbb")
+    plt.plot(np.array(list(lose_dicts.keys())), np.array(list(lose_dicts.values())), color="#bb0000")
     plt.draw()
 
-printGraph()
-# Timer(5.0, printGraph).start()
+plt.ion()
+plt.xlabel("number of trials")
+plt.ylabel("percentage of victories(%)")
+# plt.show()
+while True:
+    printGraph()
+    input('key to reprint')
