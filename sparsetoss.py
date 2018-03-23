@@ -15,7 +15,7 @@ from learningmodules.possibleactions_protoss import *
 from learningmodules.objects import *
 from learningmodules.helpers import *
 
-DATA_FILE = 'protest_agent_data'
+DATA_FILE = 'agent_data'
 
 _NO_OP = actions.FUNCTIONS.no_op.id
 _SELECT_POINT = actions.FUNCTIONS.select_point.id
@@ -195,12 +195,12 @@ class Agent(base_agent.BaseAgent):
 
       # save data and reward for training once we have a verdict
       reward = 0
-      if killed_unit_score > self.previous_killed_unit_score:
-        reward += KILL_UNIT_REWARD
-      if killed_building_score > self.previous_killed_building_score:
-        reward += KILL_BUILDING_REWARD
-      if self.failed_action == True:
-        reward += FAILED_REWARD
+      # if killed_unit_score > self.previous_killed_unit_score:
+      #   reward += KILL_UNIT_REWARD
+      # if killed_building_score > self.previous_killed_building_score:
+      #   reward += KILL_BUILDING_REWARD
+      # if self.failed_action == True:
+      #   reward += FAILED_REWARD
       if self.previous_action is not None:
         self.memory.push(self.previous_state, self.previous_action, reward)
         self.previous_killed_unit_score = killed_unit_score

@@ -3,13 +3,15 @@ import matplotlib.pyplot as plt
 from threading import Timer
 from time import sleep
 
-calculation_unit = 20
+number_of_points = 30
+calculation_unit = 1
 WIN = "1"
 LOSE = "-1"
 TIE = "0"
 
 def printGraph():
     print('drawing')
+    plt.clf()
     results = []
     win_dicts = {}
     lose_dicts = {}
@@ -17,6 +19,12 @@ def printGraph():
     with open('result.txt', 'r') as f:
         for row in f:
             results.append(row.strip())
+
+    calculation_unit = int(len(results) / number_of_points)
+
+    plt.xlabel("number of trials / " + str(calculation_unit))
+    plt.ylabel("percentage of victories(%)")
+    plt.ylim(0, 1)
 
     win_count = 0
     lose_count = 0
@@ -44,8 +52,6 @@ def printGraph():
     plt.draw()
 
 plt.ion()
-plt.xlabel("number of trials")
-plt.ylabel("percentage of victories(%)")
 # plt.show()
 while True:
     printGraph()
